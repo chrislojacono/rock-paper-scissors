@@ -5,7 +5,7 @@ export default function Scoreboard({ scores }) {
     <div className='scoreboardWrapper d-flex justify-content-center'>
       <div className='m-3'>
         <h2>Your Score</h2>
-        <h3>{scores.userScore}</h3>
+        <h3>{scores.yourScore}</h3>
       </div>
       <div className='m-3'>
         <h2>Computer Score</h2>
