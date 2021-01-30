@@ -77,6 +77,15 @@ class App extends React.Component {
           computerChoice: '',
         });
       }, 5000);
+    } else if (yourChoice === computerChoice) {
+      this.setState({ draw: true });
+      setTimeout(() => {
+        this.setState({
+          draw: false,
+          yourChoice: '',
+          computerChoice: '',
+        });
+      });
     }
   };
 
