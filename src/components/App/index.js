@@ -6,6 +6,7 @@ import Scoreboard from '../Scoreboard';
 import Loader from '../Loader';
 import youWinImg from '../../helpers/images/youwin.jpg';
 import youLoseImg from '../../helpers/images/youLose.jpg';
+import tie from '../../helpers/images/tie.jpg';
 
 class App extends React.Component {
   state = {
@@ -32,19 +33,19 @@ class App extends React.Component {
   };
 
   playAction = (userClick) => {
-    this.rockPaperScissorClick(userClick);
-    setTimeout(() => {
-      this.randomChoice();
-    }, 2000);
-  }
-
-  rockPaperScissorClick = (userClick) => {
-    const { computerChoice, yourChoice } = this.state;
     this.setState({
       yourChoice: userClick,
       loading: true,
       computerChoice: '',
     });
+    this.randomChoice();
+    setTimeout(() => {
+      this.rockPaperScissorClick(userClick);
+    }, 2000);
+  }
+
+  rockPaperScissorClick = (userClick) => {
+    const { computerChoice, yourChoice } = this.state;
     if (
       (yourChoice === 'rock' && computerChoice === 'scissors')
       || (yourChoice === 'scissors' && computerChoice === 'paper')
@@ -98,6 +99,7 @@ class App extends React.Component {
       loading,
       youWin,
       youLose,
+      draw,
     } = this.state;
 
     const scores = {
@@ -153,6 +155,7 @@ class App extends React.Component {
           {loading && <Loader />}
           {youWin && <img src={youWinImg} alt='winner winner' />}
           {youLose && <img src={youLoseImg} alt='big fat loser' />}
+          {draw && <img src={tie} alt='tied game' />}
         </div>
       </div>
     );
