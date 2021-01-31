@@ -37,11 +37,14 @@ class App extends React.Component {
       yourChoice: userClick,
       loading: true,
       computerChoice: '',
+      youWin: false,
+      youLose: false,
+      draw: false,
     });
     this.randomChoice();
     setTimeout(() => {
       this.rockPaperScissorClick(userClick);
-    }, 2000);
+    }, 500);
   }
 
   rockPaperScissorClick = (userClick) => {
@@ -55,13 +58,6 @@ class App extends React.Component {
         yourScore: prevState.yourScore + 1,
       }));
       this.setState({ youWin: true });
-      setTimeout(() => {
-        this.setState({
-          youWin: false,
-          yourChoice: '',
-          computerChoice: '',
-        });
-      }, 5000);
     } else if (
       (yourChoice === 'paper' && computerChoice === 'scissors')
       || (yourChoice === 'rock' && computerChoice === 'paper')
@@ -71,22 +67,8 @@ class App extends React.Component {
         computerScore: prevState.computerScore + 1,
         youLose: true,
       }));
-      setTimeout(() => {
-        this.setState({
-          youLose: false,
-          yourChoice: '',
-          computerChoice: '',
-        });
-      }, 5000);
     } else if (yourChoice === computerChoice) {
       this.setState({ draw: true });
-      setTimeout(() => {
-        this.setState({
-          draw: false,
-          yourChoice: '',
-          computerChoice: '',
-        });
-      });
     }
   };
 
@@ -141,6 +123,8 @@ class App extends React.Component {
               this.setState({
                 yourChoice: '',
                 computerChoice: '',
+                yourScore: 0,
+                computerScore: 0,
               });
             }}
           >
