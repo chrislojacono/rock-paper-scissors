@@ -94,7 +94,7 @@ class App extends React.Component {
         <Scoreboard scores={scores} />
         <div className='d-flex justify-content-center btnWrapper'>
           <button
-            className='btn btn-outline-success m-2'
+            className='btn btn-success m-2'
             onClick={() => {
               this.playAction('rock');
             }}
@@ -102,7 +102,7 @@ class App extends React.Component {
             Rock
           </button>
           <button
-            className='btn btn-outline-success m-2'
+            className='btn btn-success m-2'
             onClick={() => {
               this.playAction('paper');
             }}
@@ -110,7 +110,7 @@ class App extends React.Component {
             Paper
           </button>
           <button
-            className='btn btn-outline-success m-2'
+            className='btn btn-success m-2'
             onClick={() => {
               this.playAction('scissors');
             }}
@@ -118,7 +118,7 @@ class App extends React.Component {
             Scissors
           </button>
           <button
-            className='btn btn-outline-danger m-2'
+            className='btn btn-danger m-2'
             onClick={() => {
               this.setState({
                 yourChoice: '',
