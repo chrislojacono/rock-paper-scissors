@@ -6,6 +6,7 @@ import Scoreboard from '../Scoreboard';
 import Loader from '../Loader';
 import youWinImg from '../../helpers/images/youwin.jpg';
 import youLoseImg from '../../helpers/images/youLose.jpg';
+import tie from '../../helpers/images/tie.jpg';
 
 class App extends React.Component {
   state = {
@@ -32,19 +33,22 @@ class App extends React.Component {
   };
 
   playAction = (userClick) => {
-    this.rockPaperScissorClick(userClick);
-    setTimeout(() => {
-      this.randomChoice();
-    }, 2000);
-  }
-
-  rockPaperScissorClick = (userClick) => {
-    const { computerChoice, yourChoice } = this.state;
     this.setState({
       yourChoice: userClick,
       loading: true,
       computerChoice: '',
+      youWin: false,
+      youLose: false,
+      draw: false,
     });
+    this.randomChoice();
+    setTimeout(() => {
+      this.rockPaperScissorClick(userClick);
+    }, 500);
+  }
+
+  rockPaperScissorClick = (userClick) => {
+    const { computerChoice, yourChoice } = this.state;
     if (
       (yourChoice === 'rock' && computerChoice === 'scissors')
       || (yourChoice === 'scissors' && computerChoice === 'paper')
@@ -54,13 +58,6 @@ class App extends React.Component {
         yourScore: prevState.yourScore + 1,
       }));
       this.setState({ youWin: true });
-      setTimeout(() => {
-        this.setState({
-          youWin: false,
-          yourChoice: '',
-          computerChoice: '',
-        });
-      }, 5000);
     } else if (
       (yourChoice === 'paper' && computerChoice === 'scissors')
       || (yourChoice === 'rock' && computerChoice === 'paper')
@@ -70,22 +67,8 @@ class App extends React.Component {
         computerScore: prevState.computerScore + 1,
         youLose: true,
       }));
-      setTimeout(() => {
-        this.setState({
-          youLose: false,
-          yourChoice: '',
-          computerChoice: '',
-        });
-      }, 5000);
     } else if (yourChoice === computerChoice) {
       this.setState({ draw: true });
-      setTimeout(() => {
-        this.setState({
-          draw: false,
-          yourChoice: '',
-          computerChoice: '',
-        });
-      });
     }
   };
 
@@ -98,6 +81,7 @@ class App extends React.Component {
       loading,
       youWin,
       youLose,
+      draw,
     } = this.state;
 
     const scores = {
@@ -110,7 +94,7 @@ class App extends React.Component {
         <Scoreboard scores={scores} />
         <div className='d-flex justify-content-center btnWrapper'>
           <button
-            className='btn btn-outline-success m-2'
+            className='btn btn-success m-2'
             onClick={() => {
               this.playAction('rock');
             }}
@@ -118,7 +102,7 @@ class App extends React.Component {
             Rock
           </button>
           <button
-            className='btn btn-outline-success m-2'
+            className='btn btn-success m-2'
             onClick={() => {
               this.playAction('paper');
             }}
@@ -126,7 +110,7 @@ class App extends React.Component {
             Paper
           </button>
           <button
-            className='btn btn-outline-success m-2'
+            className='btn btn-success m-2'
             onClick={() => {
               this.playAction('scissors');
             }}
@@ -134,11 +118,13 @@ class App extends React.Component {
             Scissors
           </button>
           <button
-            className='btn btn-outline-danger m-2'
+            className='btn btn-danger m-2'
             onClick={() => {
               this.setState({
                 yourChoice: '',
                 computerChoice: '',
+                yourScore: 0,
+                computerScore: 0,
               });
             }}
           >
@@ -153,6 +139,7 @@ class App extends React.Component {
           {loading && <Loader />}
           {youWin && <img src={youWinImg} alt='winner winner' />}
           {youLose && <img src={youLoseImg} alt='big fat loser' />}
+          {draw && <img src={tie} alt='tied game' />}
         </div>
       </div>
     );

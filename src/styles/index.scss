@@ -4,5 +4,11 @@
 @import 'variables';
 
 body {
-  background-color: white;
+  background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0.253), rgba(150, 51, 21, 0.73)), url("../helpers/images/background.jpg");
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-position:70% 50%;
+  background-size:cover;
+  font-family: "Mukta", sans-serif;
+  height: 100%;
 }
